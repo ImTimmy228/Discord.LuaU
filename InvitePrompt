@@ -1,0 +1,24 @@
+---- LOCAL "MEANS TO BE IN FIRST LINES" ----
+
+local httpService = game:GetService "HttpService"
+local request = syn and syn.request or http_request
+    or http and http.request or request
+
+---- LOCAL "FUNCTION" ----
+
+local library = {}
+
+function library:invite(invCode)
+    return request {
+        Url = "http://127.0.0.1:6463/rpc?v=1",
+        Method = "POST", Headers = {
+            ["Content-Type"] = "application/json",
+            ["Origin"] = "https://discord.com"
+        }, Body = httpService :JSONEncode {
+            cmd = "INVITE_BROWSER", args = {code = invCode},
+            nonce = httpService :GenerateGUID(false)
+        }
+    }
+end
+
+library:invite("YOUR LINK EX: Roblox. NO LINKS!! JUST CODES AS Roblox/Fh38Mv93Mm")
